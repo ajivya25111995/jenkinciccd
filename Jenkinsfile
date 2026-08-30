@@ -1,16 +1,21 @@
 pipeline {
-    agent any
+    agent none
 
     stages {
 
-        stage('Deploy') {
+        stage('Checkout') {
+            agent any
             steps {
-                sh '''
-                    rm -rf /var/www/myapp/*
-                    cp -r ./* /var/www/myapp/
-                '''
+                checkout scm
             }
         }
 
+        stage('Test') {
+            agent any
+            steps {
+                echo 'GitHub checkout successful'
+                echo 'Declarative Pipeline is working'
+            }
+        }
     }
 }
